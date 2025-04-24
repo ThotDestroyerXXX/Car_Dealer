@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TrRental>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="history-container">
+    <div class="history-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tanggal Sewa</th>
+                    <th>Mobil</th>
+                    <th>Harga Sewa per Hari</th>
+                    <th>Total Hari</th>
+                    <th>Total Harga</th>
+                    <th>Status Pembayaran</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-cell="Tanggal Sewa">@item.rental_date.ToString("dd MMMM yyyy") - @item.return_date?.ToString("dd MMMM yyyy")</td>
+                        <td data-cell="Mobil">@item.MsCar.name</td>
+                        <td data-cell="Harga Sewa per Hari">@Html.DisplayFor(model => item.MsCar.price_per_day)</td>
+                        <td data-cell="Total Hari">@(((DateTime)item.return_date - (DateTime)item.rental_date).TotalDays)</td>
+                        <td data-cell="Total Harga">@Html.DisplayFor(model => item.total_price)</td>
+                        
+                            @if (item.payment_status == true)
+                            {
+                            <td data-cell="Status Pembayaran">Sudah Dibayar</td>
+                            }
+                            else
+                            {
+                            <td data-cell="Status Pembayaran">Belum Dibayar</td>
+                            }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+        
+    </div>
+</div>
+

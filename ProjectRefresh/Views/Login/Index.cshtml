@@ -1,0 +1,43 @@
+﻿@model ProjectRefresh.Models.MsCustomer;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="login-container">
+    <div class="login-wrapper">
+        <h1>Login</h1>
+        <form asp-controller="Login" asp-action="Index" method="post" >
+            <div class="form-input">
+                <div class="inputCredential">
+                    <label for="username">Username</label>
+                    <input type="email" asp-for="email" placeholder="email" class="inputFields" style="width: 7rem;
+    height: 2rem;
+width: 100%;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-family: " Geologica", sans-serif;" />
+                </div>
+                <div class="inputCredential">
+                    <label for="password">Password</label>
+                    <input type="password" asp-for="password" placeholder="password" class="inputFields" style="width: 7rem;
+    height: 2rem;
+width: 100%;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-family: " Geologica", sans-serif;" />
+                </div>
+                <button type="submit" style="width: 7rem;height: 2.3rem;width: 100%;border: none;border-radius: 4px;font-family: ' Geologica', sans-serif; font-size: 1.3em; text-align:center; background-color: orange; color: white; cursor: pointer;">
+                    Login
+                </button>
+                @if (ViewData["ValidateMessage"] != null)
+                {
+                    <span id="span-error">@ViewData["ValidateMessage"]</span>
+                }
+            </div>
+            
+        </form>
+    </div>
+    
+</div>

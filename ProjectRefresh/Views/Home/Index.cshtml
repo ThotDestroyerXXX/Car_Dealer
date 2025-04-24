@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MsCar>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="container">
+    <h1 id="title-home">Selamat Datang di Rental Mobil Kami</h1>
+    <form method="get" action="@Url.Action("Index")">
+        <div class="filter-mobil">
+            <div class="filter-wrapper">
+                <div class="filter-individu">
+                    <label for="pickupDate">Pickup Date:</label>
+                    <input type="date" id="pickupDate" name="pickupDate" value="@ViewBag.PickupDate" />
+                </div>
+                <div class="filter-individu">
+                    <label for="returnDate">Return Date:</label>
+                    <input type="date" id="returnDate" name="returnDate" value="@ViewBag.ReturnDate" />
+                </div>
+                <div class="filter-individu">
+                    <label for="years">Select Year:</label>
+                    @Html.DropDownList("selectedYear", ViewBag.Years as SelectList, "Semua Tahun", new { @class = "form-control", @Value = ViewBag.SelectedYear, style = "width: auto; height: 2rem; font-size: 1em; font-weight: 300;" })
+                </div>
+                <button type="submit" id="filterButton">Filter</button>
+            </div>
+        </div>
+    </form>
+    <div class="sort-container">
+        @if(ViewBag.PickupDate != null && ViewBag.ReturnDate != null)
+        {
+            <label for="years">Sort Berdasarkan</label>
+            @Html.DropDownList("selectedSort", ViewBag.SortOption, "Sorting berdasarkan", new { @class = "form-control", @id = "sortDropdown", style = "width: auto; height: 2rem; font-size: 1em; font-weight: 300;" })
+        }
+        
+    </div>
+    <div class="car-wrapper" id="carWrapper">
+        @foreach (var item in Model)
+        {
+            <div class="card-container">
+                <img src="./gigachad.jpg" id="card-img" />
+                <h2 id="namaMobil">@item.name</h2>
+                <p id="hargaMobil">Harga: @Html.DisplayFor(model => item.price_per_day)</p>
+                <form method="get" asp-action="Index" asp-controller="Rent">
+                    <input type="hidden" name="carId" value="@item.Car_id" />
+                    <input type="hidden" name="pickupDate" value="@ViewBag.PickupDate" />
+                    <input type="hidden" name="returnDate" value="@ViewBag.ReturnDate" />
+                    <button type="submit">Sewa Sekarang</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sortDropdown').change(function () {
+                var selectedSort = $(this).val();
+                var pickupDate = $('#pickupDate').val();
+                var returnDate = $('#returnDate').val();
+                var selectedYear = $('#selectedYear').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("Index", "Home")',
+                    data: {
+                        selectedSort: selectedSort,
+                        pickupDate: pickupDate,
+                        returnDate: returnDate,
+                        selectedYear: selectedYear
+                    },
+                    success: function (response) {
+                        var carWrapper = $('#carWrapper');
+                        carWrapper.html($(response).find('#carWrapper').html());
+                    },
+                    error: function () {
+                        alert('An error occurred while sorting the cars.');
+                    }
+                });
+            });
+        });
+        
+    </script>
+}

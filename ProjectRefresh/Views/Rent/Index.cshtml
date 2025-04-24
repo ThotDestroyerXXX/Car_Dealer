@@ -1,0 +1,51 @@
+﻿@model MsCar
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="rent-container">
+    <div class="rent-wrapper">
+        <h1>Sewa Mobil</h1>
+        <img src="./gigachad.jpg" id="img-mobil"/>
+        <h2>Informasi Mobil</h2>
+        <div class="table-container">
+            <table class="rotated-table">
+                <tbody>
+                    <tr>
+                        <th>Tipe Mobil</th>
+                        <th>Nama Mobil</th>
+                        <th>Transmisi</th>
+                        <th>Jumlah Penumpang</th>
+                        <th>Nama Penyewa</th>
+                        <th>Tanggal Sewa</th>
+                        <th>Harga Sewa</th>
+                        <th>Total Harga Sewa</th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>@Model.model</td>
+                        <td>@Model.name</td>
+                        <td>@Model.transmission</td>
+                        <td>@Model.number_of_car_seats</td>
+                        <td>@ViewBag.nameClaims (@ViewBag.emailClaims)</td>
+                        <td>@ViewBag.PickupDate sampai @ViewBag.ReturnDate</td>
+                        <td>@Html.DisplayFor(model => model.price_per_day) / Hari</td>
+                        <td>@ViewBag.TotalPrice</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form method="post" asp-action="Sewa" asp-controller="Rent">
+            <input type="hidden" value="@Model.Car_id" name="CarId" />
+            <input type="hidden" value="@ViewBag.PickupDate" name="PickupDate" />
+            <input type="hidden" value="@ViewBag.ReturnDate" name="ReturnDate" />
+            <input type="hidden" value="@ViewBag.TotalPriceRaw" name="TotalPrice" />
+            <input type="hidden" value="1" name="PaymentStatus" />
+            <button type="submit" id="button-submit">Sewa</button>
+        </form>
+    </div>
+</div>

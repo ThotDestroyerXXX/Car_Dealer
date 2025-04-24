@@ -1,0 +1,62 @@
+﻿table {
+width: 100%;
+border-collapse: collapse;
+margin: 20px 0;
+font-family: "Geologica", sans-serif;
+font-size: 1rem;
+text-align: left;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: orange; /* Adjust the color as needed */
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    color: #333;
+}
+
+table td:last-child {
+    text-align: left;
+}
+
+
+@media (max-width: 700px) {
+    table {
+        border-collapse: collapse;
+
+    }
+    table th {
+        display: none;
+        border: none;
+    }
+    table td {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.5rem 1rem;
+        border: none;
+    }
+    td::before {
+        content: attr(data-cell)": ";
+    }
+    td:last-child {
+        padding-bottom: 2rem;
+    }
+    td:first-child {
+        padding-top: 2rem;
+    }
+}

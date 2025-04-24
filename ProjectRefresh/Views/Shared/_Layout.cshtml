@@ -1,0 +1,60 @@
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectRefresh</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjectRefresh.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    
+
+
+    <div class="container">
+        
+        <header class="header-container">
+            <div class="header">
+                <div class="left-menu">
+                    <div class="ham-class" onclick="triggerMenu()">
+                        <span id="span-ham"></span>
+                        <span id="span-ham"></span>
+                    </div>
+                    <a asp-controller="Home" asp-action="Index" asp-area="">RentCar</a>
+                </div>
+                <div class="right-menu">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p>Hai, @User.FindFirst(ClaimTypes.Name)?.Value</p>
+                    <div class="logout-button">
+                        <a asp-area="" asp-controller="Home" asp-action="LogOut" class="btn-logout">Logout</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="logout-button">
+                        <a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                    </div>
+                    <div class="logout-button">
+                        <a asp-area="" asp-controller="Register" asp-action="Index">Register</a>
+                    </div>
+                }
+                </div>
+            </div>
+        </header>
+        <nav id="desktop-nav" class="desktop-nav">
+            <p id="close-but" onclick="triggerMenu()">x</p>
+            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-area="" asp-controller="History" asp-action="Index">Riwayat Penyewaan</a>
+            <a>Kontak</a>
+        </nav>
+        <main role="main" class="mains">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

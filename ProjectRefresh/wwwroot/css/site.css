@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Geologica", sans-serif;
+}
+
+.container {
+    width: 100%;
+}
+
+.header-container {
+    width: 100%;
+}
+
+#desktop-nav {
+    position: fixed; /* Change from absolute to fixed */
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 15rem;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    display: none; /* Initially hidden */
+    flex-direction: column;
+    text-align: left;
+    padding-top: 0.5rem;
+    gap: 1rem;
+    font-size: 1.2em;
+    font-weight: 300;
+    padding-left: 1rem;
+}
+
+#desktop-nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: 200;
+}
+
+#close-but {
+    align-self: end;
+    padding-right: 2rem;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.ham-class {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+#span-ham {
+    width: 25px;
+    height: 4px;
+    border-radius: 1000px;
+    background-color: black;
+    
+}
+
+.header {
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    top: 0; /* Position the navbar at the top of the page */
+    left: 0;
+    width: 100%; /* Full width */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 3rem;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    z-index: 10;
+    font-size: 1.3em;
+    font-weight: 200;
+}
+
+.left-menu, .right-menu {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    gap: 2rem;
+}
+.right-menu a {
+    text-decoration:none;
+    color: white;
+}
+
+.left-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.mains {
+    margin-top: 2rem;
+}
+
+.logout-button {
+    background-color: orange;
+    padding: 0.7rem;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-logout {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    
+}
+.logout-button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+@media(max-width: 500px) {
+    .logout-button {
+        padding: 0.5rem;
+        font-size: 0.9em;
+    }
+    .left-menu a {
+        display: none;
+    }
+    .right-menu p {
+        font-size: 0.8em;
+    }
+    .header {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
