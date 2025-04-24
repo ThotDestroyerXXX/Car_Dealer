@@ -16,4 +16,4 @@ obj/
 *.tmp
 *.temp
 
-apsettings.json
+appsettings.json
